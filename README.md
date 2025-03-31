@@ -55,6 +55,6 @@ dense_pcd_kpts = {"index_front": 517980, "thumb_front": 248802, "wrist": 246448}
 
 The numbers correspond to the indices of the points in the point cloud: [gripper_point_cloud_dense.npy](gripper_point_cloud_dense.npy). You can vizualize the action extraction process both in our code and by visiting the bottom of our website: [https://www.robot-learning.uk/r-plus-x](https://www.robot-learning.uk/r-plus-x). If you use a different parallel jaw gripper, convert the mesh to a point cloud, select the indices you would like to map from the gripper to the tip of the index, the tip of the thumb and the mean distance between index mcp and the thumb dip of the hand.
 
-### ✏️ Vizualizing the results
+### 🎞️ Vizualizing the results
 
 The notebook [vizualizer.ipynb](vizualizer.ipynb) provides minimal code to vizualize the hand to gripper action extraction results. For each task a scene_files folder is created that contains for each video frame, the frame's point cloud, the detected hand mesh, the gripper pose in the camera's frame, the gripper's point cloud and a file hand_joints_kpts_3d.npy that includes the sequence of gripper poses which could be used for further processing to train a model.
