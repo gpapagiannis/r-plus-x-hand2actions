@@ -3,7 +3,7 @@
 
 ![teaser](./assets/imgs/mainfig.png)
 
-This repository provides the code used to extract robot actions given a human video demonstration for the paper R+X:  Retrieval and Execution from Everyday Human Videos [[paper](https://arxiv.org/abs/2407.12957)]. For code relating to the execution phase please refer to: [colab](https://colab.research.google.com/drive/1ZxZDahvLBE2EGo8_98Lk0Zr8IvUIDjMc?usp=sharing). This is a simplified version in that it is not optimised to process large scale video datasets in parallel, instead it sequentially processes each frame in a video, runs on cpu (apart from the hand-tracking model) and acts as a good starting point demonstrating how to extract actions from human videos. We provide one video of the "grasp franta" and "pick up phone" tasks used in our experiments. Eventhough our experiments involved a human recording videos while moving, here we provide an example with a moving camera and one with a static camera each with different intrinsics.
+This repository provides the code used to extract robot actions given a human video demonstration for the paper **R+X:  Retrieval and Execution from Everyday Human Videos** [[paper](https://arxiv.org/abs/2407.12957)]. R+X is divided into a Retrieval and an Execution phase. The execution phase leverages the actions extracted from the human videos to execute tasks zero-shot in new settings. R+X's execution phase relies on Keypoint Action Tokens (KAT). For code on KAT please refer to: [colab](https://colab.research.google.com/drive/1ZxZDahvLBE2EGo8_98Lk0Zr8IvUIDjMc?usp=sharing). This is a simplified version in that it is not optimised to process large scale video datasets in parallel, instead it sequentially processes each frame in a video, runs on cpu (apart from the hand-tracking model) and acts as a good starting point demonstrating how to extract actions from human videos. We provide one video of the "grasp franta" and "pick up phone" tasks used in our experiments. Even though our experiments involved a human recording videos while moving, here we provide an example with a moving camera and one with a static camera each with different intrinsics.
 
 ### 📋 Installation
 
@@ -27,10 +27,12 @@ Install requirements.txt
 pip install -r requirements.txt
 ```
 
-• Install HaMeR for hand tracking. Follow the instructions in [https://github.com/geopavlakos/hamer](https://github.com/geopavlakos/hamer) \
-• Install the Pytorch implementation of MANO hand model [https://github.com/otaheri/MANO](https://github.com/otaheri/MANO) 
+- **Install** HaMeR for hand tracking. Follow the instructions in [https://github.com/geopavlakos/hamer](https://github.com/geopavlakos/hamer) 
+- After installing HaMeR, go to:  **_DATA > hamer_ckpts > model_config.yaml**. Then in the model_config.yaml set: **FOCAL_LENGTH = 918**. This ensures compatibility with the camera intrinsics used for the provided examples. We will fix that soon to be set automatically given any intrinsics matrix. 
+- After installing HaMeR, **replace** the renderer.py file in "hamer/hamer/utils/renderer.py" with the renderer.py provided here [renderer.py](renderer.py) 
+- **Install** the Pytorch implementation of MANO hand model [https://github.com/otaheri/MANO](https://github.com/otaheri/MANO) 
 
-After installing HaMeR, replace the renderer.py file in "hamer/hamer/utils/renderer.py" with the renderer.py provided here [renderer.py](renderer.py)
+
 
 
 ### 👟 Running the code ...
