@@ -41,6 +41,11 @@ args.body_detector = 'vitdet'
 
 IM_WIDTH = hands_rgb[0].shape[1]
 IM_HEIGHT = hands_rgb[0].shape[0]
+print("Image width: ", IM_WIDTH)
+print("Image height: ", IM_HEIGHT)
+
+INTRINSICS_HAMER_RENDERER[0, 2] = IM_WIDTH / 2
+INTRINSICS_HAMER_RENDERER[1, 2] = IM_HEIGHT / 2
 
 if VIZ_DEMO:
     # show rgbs as video
@@ -141,6 +146,8 @@ def get_hand_and_rendered_depth(rgb):
         img_size = batch["img_size"].float()
         multiplier = (2*batch['right']-1)
         scaled_focal_length = model_cfg.EXTRA.FOCAL_LENGTH / model_cfg.MODEL.IMAGE_SIZE * img_size.max()
+        INTRINSICS_HAMER_RENDERER[0 ,0] = scaled_focal_length.item()
+        INTRINSICS_HAMER_RENDERER[1, 1] = scaled_focal_length.item()
         pred_cam_t_full = cam_crop_to_full(pred_cam, box_center, box_size, img_size, scaled_focal_length).detach().cpu().numpy()
         # Render the result
         batch_size = batch['img'].shape[0]
